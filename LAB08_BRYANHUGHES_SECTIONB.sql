@@ -1,3 +1,56 @@
+/***********
+ * QUERIES *
+ ***********/
+
+SELECT
+	li.librarian_id AS 'Librarian ID',
+	li.librarian_fname AS 'First Name',
+	li.librarian_lname AS 'Last Name',
+	ls.shift_day AS 'Shift Date',
+	ls.shift_num AS 'Shift Section',
+	la.assignment_name AS 'Assignment Name' 
+FROM librarian_info li
+JOIN librarian_schedule ls 
+	ON li.librarian_id = ls.librarian 
+JOIN librarian_assignments la 
+	ON li.librarian_id = la.librarian;
+
+-- QUESTION #1 - 
+-- One that can tell me the names and shifts of the 
+-- librarians working not this coming Monday, but the Monday following
+
+SELECT
+	li.librarian_id AS 'Librarian ID',
+	li.librarian_fname AS 'First Name',
+	li.librarian_lname AS 'Last Name',
+	ls.shift_day AS 'Shift Date',
+	ls.shift_num AS 'Shift Section',
+	la.assignment_name AS 'Assignment Name' 
+FROM librarian_info li
+JOIN librarian_schedule ls 
+	ON li.librarian_id = ls.librarian 
+JOIN librarian_assignments la 
+	ON li.librarian_id = la.librarian
+WHERE ls.shift_day > '1992-07-08'
+
+-- QUESTION 2
+-- one that can tell me Beverly Cleary's assignments for that day
+
+SELECT
+	li.librarian_id AS 'Librarian ID',
+	li.librarian_fname AS 'First Name',
+	li.librarian_lname AS 'Last Name',
+	ls.shift_day AS 'Shift Date',
+	ls.shift_num AS 'Shift Section',
+	la.assignment_name AS 'Assignment Name' 
+FROM librarian_info li
+JOIN librarian_schedule ls 
+	ON li.librarian_id = ls.librarian 
+JOIN librarian_assignments la 
+	ON li.librarian_id = la.librarian
+WHERE li.librarian_fname = 'Beverly'
+AND li.librarian_lname = 'Cleary'
+
 /**************
  ***TABLE 1***
  *************/
@@ -39,14 +92,14 @@ CREATE TABLE librarian_schedule (
 INSERT INTO librarian_schedule 
 	(shift_id, shift_num, shift_day, librarian)
 VALUES
-	(2, 2, '1992-07-06', 2),
 	(1, 1, '1992-07-06', 1),
+	(2, 2, '1992-07-06', 2),
 	(3, 1, '1992-07-06', 3),
 	(4, 1, '1992-07-07', 4),
 	(5, 2, '1992-07-07', 5),
 	(6, 1, '1992-07-08', 6),
 	(7, 1, '1992-07-13', 7),
-	(8, 1, '1992-07-13', 8);
+	(8, 1, '1992-07-13', 8); 
 
 
 /**********
@@ -81,7 +134,8 @@ VALUES
 	(12, 'Childrens Library', 1, 7),
 	(13, 'Main Desk', 2, 8),
 	(24, 'Catalogue', 2, 8);
-	
+
+
 
 
 
